@@ -13,6 +13,9 @@ const { Content } = await render(entry);
 const fmt = (d: Date) =>
   d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
+const words = entry.body ? entry.body.split(/\s+/).length : 0;
+const minutes = Math.max(1, Math.round(words / 220));
+
 const jsonLd = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'Article',
@@ -23,11 +26,12 @@ const jsonLd = JSON.stringify({
   author: { '@type': 'Person', '@id': 'https://alfredwilliamson.com/about#person', name: 'Alfred Williamson' }
 });
 ---
-<Base title={`${entry.data.title} | Alfred Williamson`} description={entry.data.description} ogType="article" current="writing">
+<Base title={`${entry.data.title} | Alfred Williamson`} description={entry.data.description} ogType="article" current="writing" progress={true}>
   <article class="prose">
     <h1>{entry.data.title}</h1>
+    <p class="dek">{entry.data.description}</p>
     <p class="essay-meta">
-      {fmt(entry.data.date)}
+      Essay · {fmt(entry.data.date)} · {minutes} min
       {entry.data.updated && ` · updated ${fmt(entry.data.updated)}`}
     </p>
     <Content />
