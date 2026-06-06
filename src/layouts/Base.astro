@@ -1,0 +1,74 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  ogType?: string;
+  current?: string;
+}
+
+const { title, description, ogType = 'website', current = '' } = Astro.props;
+let path = Astro.url.pathname;
+if (!path.endsWith('/')) path += '/';
+const canonical = new URL(path, Astro.site);
+
+const nav = [
+  { href: '/', label: 'Home', key: 'home' },
+  { href: '/writing/', label: 'Writing', key: 'writing' },
+  { href: '/about/', label: 'About', key: 'about' },
+  { href: '/press/', label: 'Press', key: 'press' },
+  { href: '/projects/', label: 'Projects', key: 'projects' }
+];
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="alternate" type="application/rss+xml" title="Alfred Williamson — Writing" href="/rss.xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="Alfred Williamson" />
+    <meta name="twitter:card" content="summary" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="site">
+        <nav aria-label="Main">
+          {nav.map((item) => (
+            <a href={item.href} aria-current={current === item.key ? 'page' : undefined}>{item.label}</a>
+          ))}
+        </nav>
+      </header>
+      <main>
+        <slot />
+      </main>
+      <footer class="site">
+        <p>
+          <span id="contact-email">alfredwilliamson [at] college.harvard.edu</span>
+          &nbsp;·&nbsp; <a href="/rss.xml">RSS</a>
+        </p>
+        <script>
+          // Assemble the mailto link client-side to deter scrapers.
+          const u = 'alfredwilliamson';
+          const d = 'college.harvard.edu';
+          const el = document.getElementById('contact-email');
+          if (el) {
+            const a = document.createElement('a');
+            a.href = 'mailto:' + u + '@' + d;
+            a.textContent = u + '@' + d;
+            el.replaceChildren(a);
+          }
+        </script>
+      </footer>
+    </div>
+  </body>
+</html>
