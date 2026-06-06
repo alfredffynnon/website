@@ -1,0 +1,70 @@
+---
+import Base from '../layouts/Base.astro';
+
+const jsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'ProfilePage',
+  dateModified: new Date().toISOString().slice(0, 10),
+  mainEntity: {
+    '@type': 'Person',
+    '@id': 'https://alfredwilliamson.com/about#person',
+    name: 'Alfred Williamson',
+    url: 'https://alfredwilliamson.com',
+    jobTitle: 'Undergraduate, Applied Mathematics',
+    affiliation: { '@type': 'CollegeOrUniversity', name: 'Harvard College' },
+    nationality: ['Welsh', 'Danish'],
+    sameAs: ['https://www.linkedin.com/in/alfred-williamson-137b6020b/'],
+    subjectOf: [
+      { '@type': 'NewsArticle', url: 'https://www.cnn.com/2025/05/30/us/video/harvard-international-students-visa-trump-digvid', publisher: { '@type': 'Organization', name: 'CNN' } },
+      { '@type': 'NewsArticle', url: 'https://theharvardpoliticalreview.com/international-student-stories-alfred-williamson/', publisher: { '@type': 'Organization', name: 'Harvard Political Review' } },
+      { '@type': 'NewsArticle', url: 'https://www.thecrimson.com/article/2025/9/7/students-for-freedom-fall-protest/', publisher: { '@type': 'Organization', name: 'The Harvard Crimson' } }
+    ]
+  }
+});
+---
+<Base
+  title="About | Alfred Williamson"
+  description="About Alfred Williamson: applied mathematics at Harvard College, game theory and geopolitics, research on Russia–China relations, and public advocacy for international students."
+  ogType="profile"
+  current="about"
+>
+  <h1>About</h1>
+  <p>
+    I am a second-year student at Harvard College studying applied mathematics. My
+    current work sits at the intersection of game theory and geopolitics: how formal
+    models of cooperation and defection hold up when the players are states with
+    asymmetric power, asymmetric information, and choices that are never simply
+    binary. I expect this to become my senior thesis.
+  </p>
+  <p>
+    I conduct research on Russia&rsquo;s growing technological reliance on China with
+    Harvard&rsquo;s Research in International Security Studies (RISS), and I work on the
+    Global Affairs Program at the Institute of Politics. I co-founded Varsko
+    Intelligence, an early-stage project on geopolitical risk. I am half Welsh and
+    half Danish, which is one reason the politics of small states next to large ones
+    holds my attention.
+  </p>
+  <p>
+    In 2025, when the federal government moved to restrict Harvard&rsquo;s international
+    students, I spoke publicly against the university yielding &mdash; at rallies covered by
+    the <a href="https://www.thecrimson.com/article/2025/9/7/students-for-freedom-fall-protest/">Harvard Crimson</a>,
+    on <a href="https://www.cnn.com/2025/05/30/us/video/harvard-international-students-visa-trump-digvid">CNN</a>,
+    and in a <a href="https://theharvardpoliticalreview.com/international-student-stories-alfred-williamson/">Harvard Political Review profile</a>.
+    I remain involved in that work.
+  </p>
+  <p>
+    The best way to reach me is email (footer of this page), or
+    <a href="https://www.linkedin.com/in/alfred-williamson-137b6020b/">LinkedIn</a>.
+  </p>
+
+  <h2>For journalists</h2>
+  <p class="note">
+    Alfred Williamson is a second-year undergraduate at Harvard College studying
+    applied mathematics, with research interests in game theory and geopolitics. A
+    Welsh-Danish international student, he has been a prominent student voice on US
+    visa restrictions affecting international students, appearing on CNN and in the
+    Harvard Political Review. He can be reached by email at the address in the footer
+    of alfredwilliamson.com.
+  </p>
+  <script type="application/ld+json" set:html={jsonLd} />
+</Base>
