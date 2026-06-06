@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+
+const items = [
+  {
+    outlet: 'CNN',
+    title: "'As soon as they give in, Trump wins': Harvard international student urges the school to keep standing up",
+    date: 'May 2025',
+    url: 'https://www.cnn.com/2025/05/30/us/video/harvard-international-students-visa-trump-digvid'
+  },
+  {
+    outlet: 'Harvard Political Review',
+    title: 'Resisting Silence: Fighting for International Students in the Face of Fear',
+    date: '2025',
+    url: 'https://theharvardpoliticalreview.com/international-student-stories-alfred-williamson/'
+  },
+  {
+    outlet: 'The Harvard Crimson',
+    title: "After Harvard's Court Victory, Students and Faculty Rally Against Deal With Trump",
+    date: 'September 2025',
+    url: 'https://www.thecrimson.com/article/2025/9/7/students-for-freedom-fall-protest/'
+  }
+];
+---
+<Base
+  title="Press | Alfred Williamson"
+  description="Press coverage of Alfred Williamson, including CNN, the Harvard Political Review, and the Harvard Crimson."
+  current="press"
+>
+  <h1>Press</h1>
+  <p>
+    Coverage of my advocacy for international students during the 2025 federal
+    actions against Harvard.
+  </p>
+  <ul class="press-list">
+    {items.map((i) => (
+      <li>
+        <span class="outlet">{i.outlet} · {i.date}</span><br />
+        <a href={i.url}>{i.title}</a>
+      </li>
+    ))}
+  </ul>
+</Base>
