@@ -28,12 +28,14 @@ const jsonLd = JSON.stringify({
 ---
 <Base title={`${entry.data.title} | Alfred Williamson`} description={entry.data.description} ogType="article" current="writing" progress={true}>
   <article class="prose">
-    <h1>{entry.data.title}</h1>
-    <p class="dek">{entry.data.description}</p>
-    <p class="essay-meta">
-      Essay · {fmt(entry.data.date)} · {minutes} min
-      {entry.data.updated && ` · updated ${fmt(entry.data.updated)}`}
-    </p>
+    <header>
+      <h1>{entry.data.title}</h1>
+      <p class="dek">{entry.data.description}</p>
+      <p class="essay-meta">
+        Essay · {fmt(entry.data.date)} · {minutes} min
+        {entry.data.updated && ` · updated ${fmt(entry.data.updated)}`}
+      </p>
+    </header>
     <Content />
   </article>
   <script type="application/ld+json" set:html={jsonLd} />
